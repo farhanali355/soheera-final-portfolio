@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // CDN base URL
-const CDN_BASE = "https://cdn.example.com/";
+const CDN_BASE = "https://farhanali355.github.io/soheera-final-portfolio/cdn-media/";
 
 // Folder with HTML files
 const FOLDER = ".";
@@ -22,13 +22,19 @@ function processFolder(folder) {
 
       // Replace img src
       content = content.replace(/<img\s+[^>]*src=["']([^"']+)["']/g, (match, p1) => {
-        const filename = path.basename(p1);
+        const filename = p1.split('/').pop(); // get filename only
         return match.replace(p1, CDN_BASE + filename);
       });
 
       // Replace video src
       content = content.replace(/<video\s+[^>]*src=["']([^"']+)["']/g, (match, p1) => {
-        const filename = path.basename(p1);
+        const filename = p1.split('/').pop(); // get filename only
+        return match.replace(p1, CDN_BASE + filename);
+      });
+
+      // Replace source src inside video/audio tags
+      content = content.replace(/<source\s+[^>]*src=["']([^"']+)["']/g, (match, p1) => {
+        const filename = p1.split('/').pop();
         return match.replace(p1, CDN_BASE + filename);
       });
 
