@@ -1,0 +1,6 @@
+# Ignore videos and images (using CDN)
+videos/
+images/
+
+# Ignore Node modules
+node_modules/
